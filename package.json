@@ -1,0 +1,19 @@
+{
+  "name": "docker-node-example",
+  "version": "0.0.0",
+  "description": "An example of a Dockerized Node.js web app.",
+  "author": "Mark <mark@remarkablemark.org>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+      "docker node"
+  ],
+  "dependencies": {
+    "express": "^4.13.4",
+    "redis": "^2.6.2"
+  },
+  "devDependencies": {},
+  "license": "MIT"
+}
