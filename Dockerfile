@@ -13,10 +13,15 @@ COPY package.json ./
 
 # If you are building your code for production
 # RUN npm ci --only=production
-RUN npm install
+# RUN npm install
+# RUN npm install --production --unsafe-perm
+# RUN npm audit fix
+# RUN npm link @angular/cli
+# RUN npm install tslint typescript --save-dev
 
 # copy app source to destination container
 COPY . .
+# RUN npm run lint
 
 # expose container port
 EXPOSE 8080

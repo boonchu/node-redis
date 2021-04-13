@@ -9,7 +9,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js . --ext .js --fix"
   },
   "keywords": [
-      "docker node"
+    "docker node"
   ],
   "dependencies": {
     "express": "^4.13.4",
