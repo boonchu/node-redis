@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint.js"
+    "lint": "./node_modules/eslint/bin/eslint.js . --ext .js --fix"
   },
   "keywords": [
       "docker node"
