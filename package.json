@@ -15,7 +15,7 @@
     "express": "^4.13.4",
     "redis": "^2.6.2",
     "eslint": "^7.6.0",
-    "eslint-config-google": "^0.14.0"`
+    "eslint-config-google": "^0.14.0"
   },
   "devDependencies": {},
   "license": "MIT"
