@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "lint": "./node_modules/eslint/bin/eslint.js . --ext .js --fix"
+    "lint": "./node_modules/eslint/bin/eslint.js . --ext .js --fix",
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "keywords": [
     "docker node"
@@ -18,6 +19,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-airbnb-base": "14.1.0"
   },
+  "eslintIgnore": ["*.spec.ts", "test.js"],
   "devDependencies": {},
   "license": "MIT"
 }

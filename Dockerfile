@@ -11,19 +11,17 @@ WORKDIR /usr/src/app/
 # remember the working directory is `/usr/src/app/`
 COPY package.json ./
 
-# If you are building your code for production
-# RUN npm ci --only=production
-# RUN npm install
 # RUN npm install --production --unsafe-perm
 # RUN npm audit fix
 # RUN npm link @angular/cli
 # RUN npm install tslint typescript --save-dev
+# RUN npm install mocha chai chai-http
 
 # copy app source to destination container
 COPY . .
 # RUN npm run lint
+# RUN npm run test
 
 # expose container port
 EXPOSE 8080
-
 CMD npm start

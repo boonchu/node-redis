@@ -12,3 +12,19 @@
   * https://stackoverflow.com/questions/42706584/eslint-error-parsing-error-the-keyword-const-is-reserved
   * https://gist.github.com/nkbt/9efd4facb391edbf8048
   * https://github.com/GoogleCloudPlatform/opentelemetry-operations-js/issues/84#issuecomment-642081224
+
+#### Sonarqube Scanner 
+
+  * Configure 'Manage Jenkins' -> 'Global Tool Configuration' -> 'SonarQube Scanner'
+  * Setup 'Sonar Scanner 4.6' -> Use Sonar Scanner 4.6
+  * Configure 'Manage Jenkins' -> 'Configure System' -> 'Sonar Scanner Server'
+  * check box 'Environment Variable -> setup name 'Sonar Scanner Server' -> setup url 'http://sonarqube-sonarqube:9000'
+  * Access https://sonarqube.ingress.local (admin/admin)
+  * Create new project 'node-redis' to get access token and update to Jenkinsfile.
+
+```
+sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-redis \
+	-Dsonar.sources=. -Dsonar.host.url=http://sonarqube-sonarqube:9000 \
+	-Dsonar.login=[ACCESS TOKEN] \
+	-Dsonar.exclusions=node_modules/*/**,test/**/*"
+```
