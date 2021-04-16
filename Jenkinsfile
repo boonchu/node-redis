@@ -23,7 +23,27 @@ spec:
     - sleep
     args:
     - infinity
-
+  - name: kaniko-agent
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - name: docker-secret
+        mountPath: /kaniko/.docker
+  restartPolicy: Never
+  volumes:
+    - name: docker-secret
+      projected:
+        sources:
+        - secret:
+            name: docker-secret
+            items:
+            - key: .dockerconfigjson
+              path: config.json
 '''
             defaultContainer 'node'
         }
@@ -84,6 +104,23 @@ spec:
                 }
             }
         }
+
+        stage('Build Image') {
+            steps{
+                script {
+                    // Determine version number for next release.
+                    env.pkgVersion = sh (
+                      script: 'git tag --list | sort --version-sort --reverse | head -n1 | cut -d "-" -f1',
+                      returnStdout: true
+                    ).trim()
+                    env.newPkgVersion = bumpMinorVersion(pkgVersion)
+                }
+                container('kaniko-agent') {
+		    sh "/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.io/boonchu/node-redis:${newPkgVersion}"
+                }
+            }
+        }
+
     }
 }
 
@@ -96,15 +133,4 @@ String bumpMinorVersion(String version) {
     def newMinorVersion = parts[1].toInteger() + 1
 
     return "${parts[0]}.${newMinorVersion}.${parts[2]}"
-}
-
-// Increment the patch part of a `MAJOR.MINOR.PATCH` semver version.
-String bumpPatchVersion(String version) {
-    def parts = version.tokenize('.')
-    if (parts.size() != 3) {
-        error "${version} is not a valid MAJOR.MINOR.PATCH version"
-    }
-    def newPatchVersion = parts[2].toInteger() + 1
-
-    return "${parts[0]}.${parts[1]}.${newPatchVersion}"
 }
