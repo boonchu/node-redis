@@ -31,6 +31,4 @@ const server = app.listen(port, () => {
 });
 
 // https://stackoverflow.com/questions/33986863/mocha-api-testing-getting-typeerror-app-address-is-not-a-function
-module.exports = {
-    server
-}
+module.exports = server
