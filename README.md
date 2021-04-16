@@ -28,3 +28,7 @@ sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-redis \
 	-Dsonar.login=[ACCESS TOKEN] \
 	-Dsonar.exclusions=node_modules/*/**,test/**/*"
 ```
+
+#### Node Test with Mocha and Chai
+  
+  * https://github.com/BretFisher/node-docker-good-defaults/tree/85520919f56ce82ea0086751327590b44d758b8e
