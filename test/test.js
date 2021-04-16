@@ -7,10 +7,10 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 chai.should();
 
-describe('API /hits', () => {
+describe('API /', () => {
     it('it should return 200', (done) => {
         chai.request(app)
-            .get('/hits')
+            .get('/')
             .end((err, res) => {
                 res.should.have.status(200);
                 done();
