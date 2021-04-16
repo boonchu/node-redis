@@ -18,9 +18,10 @@ app.get('/', (req, res) => {
 });
 
 const port = 8080;
-module.exports = server
 var server = app.listen(port, () => {
     var host = server.address().address;
     var port = server.address().port;
     console.log('App listening at http://%s:%s', host, port);
 });
+
+module.exports = server
