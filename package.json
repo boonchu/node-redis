@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "./node_modules/eslint/bin/eslint.js . --ext .js --fix",
-    "test": "yarn ./node_modules/mocha/bin/mocha --timeout 10000 --exit"
+    "test": "./node_modules/mocha/bin/mocha --timeout 10000 --exit"
   },
   "keywords": [
     "docker node"
