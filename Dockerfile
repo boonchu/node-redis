@@ -15,7 +15,6 @@ COPY package.json ./
 # RUN npm audit fix
 # RUN npm link @angular/cli
 # RUN npm install tslint typescript --save-dev
-# RUN npm install mocha chai chai-http
 
 # copy app source to destination container
 COPY . .
