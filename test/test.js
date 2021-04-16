@@ -3,16 +3,22 @@ const app = require('../server');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const expect = chai.expect
 
 chai.use(chaiHttp);
 chai.should();
 
+// https://www.linkedin.com/pulse/how-make-tests-using-chai-mocha-sam-barros/
 describe('API /', () => {
     it('it should return 200', (done) => {
         chai.request(app)
             .get('/')
             .end((err, res) => {
-                res.should.have.status(200);
+
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('object');
+
                 done();
             });
     });

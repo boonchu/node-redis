@@ -31,6 +31,9 @@ sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-redis \
 
 #### Node Test with Mocha and Chai
   
+  * https://www.digitalocean.com/community/tutorials/test-a-node-restful-api-with-mocha-and-chai
+  * https://www.linkedin.com/pulse/how-make-tests-using-chai-mocha-sam-barros/
+  * https://medium.com/@asciidev/testing-a-node-express-application-with-mocha-chai-9592d41c0083
   * https://github.com/BretFisher/node-docker-good-defaults/tree/85520919f56ce82ea0086751327590b44d758b8e
   * https://stackoverflow.com/questions/64336642/nodejs-testing-error-timeout-of-2000ms-exceeded
   * https://stackoverflow.com/questions/33986863/mocha-api-testing-getting-typeerror-app-address-is-not-a-function
