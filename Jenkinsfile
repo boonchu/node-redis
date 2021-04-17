@@ -3,12 +3,6 @@
 // https://github.com/jenkinsci/kubernetes-plugin/blob/master/examples/multi-container.groovy
 // https://github.com/jenkinsci/kubernetes-plugin#container-group-support
 
-/**
-   * Sample Jenkinsfile for Jenkins2 Pipeline
-   * from https://github.com/hotwilson/jenkins2/edit/master/Jenkinsfile
-   * by wilsonmar@gmail.com 
- */
-
 pipeline {
     agent {
         kubernetes {
@@ -93,7 +87,7 @@ spec:
                             echo env.PATH
                             sh "printenv"
                             echo "++++++++++++++++++++++++++"
-                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-redis -Dsonar.sources=. -Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.login=96440d13a5848d154631de7f0f51bfc62730bc5f -Dsonar.exclusions=node_modules/*/**,test/**/*"
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-redis -Dsonar.sources=. -Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.login=f72ddb7f87c4d9c0ef19bb5c7a6ec5688baa931b -Dsonar.exclusions=node_modules/*/**,test/**/*"
                         }
                     }
                 }
@@ -107,6 +101,14 @@ spec:
                     sh "npm audit fix"
                     sh "npm link @angular/cli"
                     sh "npm test"
+                }
+            }
+        }
+        
+        stage('Integration') {
+            steps {
+                container('node') {
+                   junit 'test-results.xml'
                 }
             }
         }

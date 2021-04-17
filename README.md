@@ -38,3 +38,7 @@ sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-redis \
   * https://github.com/BretFisher/node-docker-good-defaults/tree/85520919f56ce82ea0086751327590b44d758b8e
   * https://stackoverflow.com/questions/64336642/nodejs-testing-error-timeout-of-2000ms-exceeded
   * https://stackoverflow.com/questions/33986863/mocha-api-testing-getting-typeerror-app-address-is-not-a-function
+
+#### Node Test with JUnit Mocha Reporter
+
+  * https://stackoverflow.com/questions/55415869/how-to-run-mocha-tests-with-reporter 
