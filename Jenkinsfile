@@ -3,6 +3,12 @@
 // https://github.com/jenkinsci/kubernetes-plugin/blob/master/examples/multi-container.groovy
 // https://github.com/jenkinsci/kubernetes-plugin#container-group-support
 
+/**
+   * Sample Jenkinsfile for Jenkins2 Pipeline
+   * from https://github.com/hotwilson/jenkins2/edit/master/Jenkinsfile
+   * by wilsonmar@gmail.com 
+ */
+
 pipeline {
     agent {
         kubernetes {
@@ -49,7 +55,7 @@ spec:
         }
     }
     stages {
-        
+
         stage('SCM Get Code') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/boonchu/node-redis.git']]])
@@ -66,10 +72,10 @@ spec:
                 }
             }
         }
-        
+
         // https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/
         stage('SonarQube analysis') {
-            
+
         //    environment {
         //        JAVA_HOME = '/usr/lib/jvm/default-java'
         //        PATH      = "${JAVA_HOME}/bin:${PATH}"
@@ -79,21 +85,21 @@ spec:
                 container('sonar-scanner') {
                     script {
                         // https://github.com/SonarSource/sonar-scanner-jenkins/blob/master/sonar-docs/analysis/scan/sonarscanner-for-jenkins.md#using-a-jenkins-pipeline
-                        def scannerHome = tool 'Sonar Scanner 4.5';
-                        withSonarQubeEnv('Sonar Scanner 4.5 Server') { 
+                        def scannerHome = tool 'Sonar Scanner 4.6';
+                        withSonarQubeEnv('Sonar Scanner Server') {
                             // https://kb.novaordis.com/index.php/Jenkins_Pipeline_Environment_Variables
                             echo "++++++++++++++++++++++++++"
                             echo env.JAVA_HOME
                             echo env.PATH
                             sh "printenv"
                             echo "++++++++++++++++++++++++++"
-                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-redis -Dsonar.sources=. -Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.login=61faf3659971abb58f753eb6c449a8d859a838f7 -Dsonar.exclusions=node_modules/*/**,test/**/*"
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-redis -Dsonar.sources=. -Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.login=96440d13a5848d154631de7f0f51bfc62730bc5f -Dsonar.exclusions=node_modules/*/**,test/**/*"
                         }
                     }
                 }
-            }    
+            }
         }
-        
+
         stage('Unit Test') {
             steps {
                 container('node') {
@@ -116,7 +122,7 @@ spec:
                     env.newPkgVersion = bumpMinorVersion(pkgVersion)
                 }
                 container('kaniko-agent') {
-		    sh "/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.io/boonchu/node-redis:${newPkgVersion}"
+                    sh "/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.io/boonchu/node-redis:${newPkgVersion}"
                 }
             }
         }

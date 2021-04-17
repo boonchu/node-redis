@@ -1,6 +1,7 @@
 #### NodeJS CI
 
   * https://github.com/craig-br/ans-tower-devsecops/blob/master/JenkinsFile_JuiceShop
+  * https://github.com/BretFisher/node-docker-good-defaults
 
 #### NodeJS Docker CI
 
